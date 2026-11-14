@@ -73,6 +73,7 @@ Things that went wrong while building, each found by a test, a rehearsal or a re
 - **Our own checker raised a false tamper alarm.** When OutLayer's API was rate-limited, the error response was read as "different code ran". It now reports "unreachable right now" instead ([`85f37b0`](https://github.com/amudhan23/touchstone/commit/85f37b0)).
 - **The vault was briefly short of spare balance.** The unstripped contract (853 KB) locked more storage deposit than the vault had spare above what it owed holders. The stripped build is 413 KB, and a solvency check now guards it ([`eab8ad4`](https://github.com/amudhan23/touchstone/commit/eab8ad4)).
 - **Fuzzing found two money bugs** before any review did: an accumulator overflow and a 1-yocto over-credit ([`aff2f4c`](https://github.com/amudhan23/touchstone/commit/aff2f4c)). The full list from two independent security reviews is in [`docs/SECURITY.md`](docs/SECURITY.md).
+- **On submission day the exit guarantee became live for real.** OutLayer's testnet stopped running enclave jobs on 14 Nov (HTTP 524), so no attested decision landed for over 24h and both vaults passed their liveness timeout. From then on *anyone* can call `trigger_emergency`, and the site shows that button to every visitor. Nothing can reset the clock except an attested decision: the main vault has no access keys, and there is no override. If you find a vault in emergency mode, that is the guarantee doing its job. Holders withdraw their pro-rata share of the NEAR pool and keep claims on the cross-chain value.
 
 ## Repository
 
