@@ -61,7 +61,7 @@ let stampSeq = 0;
 function stamp(state, word) {
   const color = { ok: "var(--verified)", bad: "var(--void)", wait: "var(--wax)" }[state];
   const id = "ring" + stampSeq++;
-  const micro = "· VERIFIABLE · ALPHA · VAULTS · NEAR ".repeat(2);
+  const micro = "· TOUCHSTONE · TRADING VAULTS · NEAR ".repeat(2);
   return `<svg class="stamp slam" viewBox="0 0 100 100" role="img" aria-label="${esc(word)}">
     <circle cx="50" cy="50" r="47" fill="none" stroke="${color}" stroke-width="2.6"/>
     <circle cx="50" cy="50" r="34" fill="none" stroke="${color}" stroke-width="0.9"/>
