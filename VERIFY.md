@@ -13,9 +13,9 @@ Live vaults on NEAR testnet:
 - **`vault.alpha-vaults-23.testnet`**: the main vault, with 19 decisions since 1 Nov.
 - **`vault2.alpha-vaults-23.testnet`**: the rehearsal vault, which ran the fully attested cycle with a real swap.
 
-To check either one: `node verify.mjs --vault <id>`.
+To check either one: `node verify.mjs --vault <id>`. After the six checks it also prints whether the vault account holds any access keys. The main vault has none: its only key was deleted on 14 Nov, so nobody can redeploy it outside the public 48h `propose_code` path.
 
-Most recent output (13 Nov), main vault:
+Most recent output (14 Nov, after the key was deleted), main vault:
 
 ```
 ✓ 1. Which code ran (Intel TDX attestations)
@@ -26,10 +26,12 @@ Most recent output (13 Nov), main vault:
   13 Bulletproof bundles verified here (leverage ≤ 3x, drawdown ≤ 20%); latest 8 computed from actual holdings, inputs checked by the contract
 ✓ 4. Real market prices went in
   4 enclave inputs match their attested input_hash
-✓ 5. Swaps on Sepolia match their commitments
+✓ 5. Swaps on Ethereum Sepolia match their commitments
   4 recorded swaps all carry their decision's commitment in calldata: 1 signed by the vault's own wallet 0x63fbAd3b…, 2 from before v4 signed by the executor's wallet (the design review 1 replaced), 1 recorded honestly as reverted
 ✓ 6. The vault can pay every holder
-  free balance 4.4768 NEAR ≥ pool 1.0487 NEAR (code + state stake 4.6622 NEAR); mode Relayed, deposits closed while value is cross-chain
+  free balance 4.6638 NEAR ≥ pool 1.0487 NEAR (code + state stake 4.6851 NEAR); mode Relayed, deposits closed while value is cross-chain
+🔒 No access keys on the vault account
+  nobody can redeploy it; code changes only via propose_code → 48h → apply_code
 6/6 passed
 ```
 

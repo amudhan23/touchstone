@@ -73,7 +73,7 @@ fees and proposes changes, and proposals lapse if it is sold.
 ## Submission checklist (Sat, aim 4 PM ET, hard stop 6:59 PM ET)
 
 - [ ] after 17:51 UTC: `apply_strategy` (anyone), then one live cycle with a vault-signed, enclave-sized swap
-- [ ] final contract deploy, then **delete the vault account's full-access key**; confirm `view_access_key_list` is empty
+- [x] final contract deploy, then **delete the vault account's full-access key**; confirm `view_access_key_list` is empty (tx `HomnW8Dy…`, 0 keys)
 - [ ] repo public, fresh `git clone` → README one-command run works
 - [ ] testnet: vault deployed, OutLayer project live, ≥2 attested cycles
 - [ ] frontend `?vault=<contract>` live mode shown in video

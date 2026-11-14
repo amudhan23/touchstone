@@ -45,6 +45,7 @@ Every claim with its code, its test and a live transaction: [`VERIFY.md`](VERIFY
 | Attested mode: the vault requests the run on-chain and receives it in its own callback | **Live** on the rehearsal vault (full cycle with a swap). The main vault stays in relayed mode: on 14 Nov OutLayer's testnet timed out every enclave run (HTTP 524), and attested mode would have stalled it |
 | Vault-signed Uniswap swaps via Chain Signatures | **Live** on Ethereum Sepolia |
 | NEAR Intents way back (USDC to NEAR) | Arrival half **live** on testnet; send half built and tested but mainnet-only, because NEAR Intents has no testnet; live 1Click quotes |
+| Main vault account locked (no access keys; upgrades only via a public 48h timelock) | **Done** 14 Nov, tx [`HomnW8Dy…`](https://testnet.nearblocks.io/txns/HomnW8Dy2DsNAqoLZ1xAwcdu5hWwocerRJothcgNsqMj). `node executor/verify.mjs` shows it |
 | Mainnet (trading on Base) | Built and tested, **not deployed** |
 | Professional audit | **No**. Two independent AI-assisted reviews, see [`docs/SECURITY.md`](docs/SECURITY.md) |
 

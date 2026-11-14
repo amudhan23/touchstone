@@ -27,9 +27,22 @@ function report(name, res) {
   console.log(`${mark[res.state] ?? "?"} ${C.b}${name}${C.x}\n  ${res.detail}`);
 }
 
-async function evm(method, params) {
-  const r = await fetch(sepolia, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ jsonrpc: "2.0", id: 1, method, params }) });
+// Public RPCs sit behind load balancers; a lagging backend answers null for a tx it hasn't seen.
+// So: try the configured RPC, then a fallback, and only give up after several rounds.
+const evmRpcs = [...new Set([sepolia, NET.evm.chainId === 11155111 ? "https://sepolia.drpc.org" : "https://mainnet.base.org"])];
+async function evmOnce(url, method, params) {
+  const r = await fetch(url, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ jsonrpc: "2.0", id: 1, method, params }), signal: AbortSignal.timeout(15000) });
   return (await r.json()).result;
+}
+async function evm(method, params) {
+  for (let round = 0; round < 10; round++) {
+    for (const url of evmRpcs) {
+      const res = await evmOnce(url, method, params).catch(() => null);
+      if (res) return res;
+    }
+    await new Promise((r) => setTimeout(r, 400 + 300 * round));
+  }
+  return null;
 }
 
 /** Check 5: each recorded Sepolia execution succeeded and its calldata ends in the decision's commitment.
@@ -41,11 +54,8 @@ async function checkSwapsCarryCommitments(vault) {
   let vaultSigned = 0, legacy = 0, reverted = 0;
   for (const c of recorded) {
     const hash = c.execution_ref.slice(-66);
-    let tx, rc;
-    for (let i = 0; i < 3 && !(tx && rc); i++) {
-      [tx, rc] = await Promise.all([evm("eth_getTransactionByHash", [hash]), evm("eth_getTransactionReceipt", [hash])]).catch(() => []);
-      if (!(tx && rc)) await new Promise((r) => setTimeout(r, 1500));
-    }
+    const tx = await evm("eth_getTransactionByHash", [hash]);
+    const rc = tx && await evm("eth_getTransactionReceipt", [hash]);
     if (!tx || !rc) return { state: "wait", detail: `Sepolia tx ${hash.slice(0, 12)}… not reachable right now` };
     if (!tx.input.toLowerCase().includes(c.commitment.toLowerCase())) return { state: "bad", detail: `#${c.id}: swap calldata does not carry commitment ${c.commitment.slice(0, 12)}…` };
     if (rc.status !== "0x1") { if (c.execution_ref.startsWith("reverted:")) { reverted++; continue; } return { state: "bad", detail: `#${c.id}: recorded as filled but Sepolia tx ${hash} reverted` }; }
@@ -68,6 +78,12 @@ async function checkSolvency(lv) {
   return { state: "ok", detail: `free balance ${n(free)} NEAR ≥ pool ${n(pool)} NEAR (code + state stake ${n(locked)} NEAR); mode ${s.mode}, deposits ${s.deposits_open ? "open" : "closed while value is cross-chain"}` };
 }
 
+async function accessKeys() {
+  const r = await fetch(rpc, { method: "POST", headers: { "content-type": "application/json" },
+    body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "query", params: { request_type: "view_access_key_list", finality: "final", account_id: vaultId } }) });
+  return (await r.json()).result.keys.length;
+}
+
 async function main() {
   await proofs.default({ module_or_path: readFileSync(new URL("../frontend/pkg/vault_proofs_bg.wasm", import.meta.url)) });
   const lv = new LiveVault(vaultId, rpc);
@@ -80,6 +96,11 @@ async function main() {
   report("4. Real market prices went in", await V.checkPricesVerified(vault));
   report(`5. Swaps on ${NET.evm.name} match their commitments`, await checkSwapsCarryCommitments(vault));
   report("6. The vault can pay every holder", await checkSolvency(lv));
+  // Not counted as a check: the rehearsal vault keeps its key on purpose. Shown so nobody has to take "locked" on faith.
+  const keys = await accessKeys();
+  console.log(keys === 0
+    ? `${C.g}🔒${C.x} ${C.b}No access keys on the vault account${C.x}\n  nobody can redeploy it; code changes only via propose_code → 48h → apply_code`
+    : `${C.d}ℹ ${keys} access key(s) on the vault account: whoever holds one can replace the code (the main vault has none)${C.x}`);
   const bad = results.filter((r) => r === "bad").length, wait = results.filter((r) => r === "wait").length;
   console.log(`\n${bad ? `${C.r}${bad} check(s) FAILED${C.x}` : `${C.g}${results.length - wait}/${results.length} passed${C.x}`}${wait ? ` · ${wait} not applicable / unreachable` : ""}`);
   process.exit(bad ? 1 : 0);

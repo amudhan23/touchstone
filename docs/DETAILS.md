@@ -156,8 +156,8 @@ set up your own: `scripts/outlayer-setup.md`, then `node executor/deploy.mjs`.
 - **Exit guarantees:** if no attested decision lands for 24h, anyone can
   trigger a one-way emergency exit. Withdrawals pay the NEAR pool pro rata and
   record claims on cross-chain value. The vault's EVM wallet is fixed forever.
-- **Upgrades:** after the final deploy the vault account's full-access key is
-  deleted. From then on, code can only change through `propose_code` → 48h →
+- **Upgrades:** the main vault account's full-access key was deleted on
+  14 Nov (tx `HomnW8Dy…`). From then on, code can only change through `propose_code` → 48h →
   `apply_code`, with the new code's hash public the whole time.
 - **The enclave is not the enforcement point.** Even a malicious strategy
   (or malicious parameters) cannot exceed the guardrails: the contract checks

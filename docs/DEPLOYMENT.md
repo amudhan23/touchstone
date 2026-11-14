@@ -161,3 +161,4 @@ Found during the rehearsal, and fixed on both vaults before Saturday:
   - HTTPS calls returned OutLayer's gateway page "524: A timeout occurred" after ~126s.
   - OutLayer's API answered normally, and both paths had worked the day before.
 - **The main vault therefore stays in relayed mode.** Attested mode would have blocked relayed cycles and left the vault silent, and after 24h of silence anyone could trigger its emergency exit. Attested mode is demonstrated end to end on `vault2`.
+- **Main vault locked.** Its only full-access key was deleted: tx [`HomnW8Dy…`](https://testnet.nearblocks.io/txns/HomnW8Dy2DsNAqoLZ1xAwcdu5hWwocerRJothcgNsqMj). `view_access_key_list` on `vault.alpha-vaults-23.testnet` now returns no keys, so the contract can change only through `propose_code` → 48h → `apply_code`, and the storage stake can only come back through `close_vault` on an empty vault. `vault2` keeps its key as the rehearsal vault.
