@@ -29,7 +29,7 @@ outlayer upload target/wasm32-wasip1/release/strategy.wasm   # prints sha256 + F
 outlayer deploy alpha-vault-strategy <FastFS URL>
 ```
 (Alternative: point the project at this GitHub repo — OutLayer clones and
-builds it; `version_key: "amudhan23/verifiable-alpha-vaults@<commit>"` then
+builds it; `version_key: "amudhan23/touchstone@<commit>"` then
 pins the exact build. Prefer this for the final submission so judges see the
 source→hash chain.)
 

@@ -6,7 +6,7 @@ members = ["crates/proofs", "contracts/vault", "strategy", "tools/fixtures"]
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
-repository = "https://github.com/amudhan23/verifiable-alpha-vaults"
+repository = "https://github.com/amudhan23/touchstone"
 
 [profile.release]
 codegen-units = 1
