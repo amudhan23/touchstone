@@ -97,7 +97,7 @@ The NEAR Intents arrival half ran live: tx `AFfuBsgvysevy8JVU5YRRB73ie5y14G5Pubf
 Read these before you trust anything above. Each is explained in [`docs/SECURITY.md`](docs/SECURITY.md):
 
 - **Testnet only.** Sepolia's pools are mispriced about 10×, so only sells fill.
-- **Relayed mode is live; attested mode is switched on 14 Nov.** In relayed mode the relayer is trusted to run on time and to report the valuation on the NAV chart. It can't move NEAR, price a deposit, cash a fee, size a trade, or pick a decision the enclave didn't commit.
+- **The main vault runs in relayed mode.** Attested mode is proven end to end on `vault2` (a full cycle with a swap). It was not switched on for the main vault on 14 Nov, because OutLayer's testnet timed out every enclave run that day (HTTP 524), and attested mode would have stalled the vault. In relayed mode the relayer is trusted to run on time and to report the valuation on the NAV chart. It can't move NEAR, price a deposit, cash a fee, size a trade, or pick a decision the enclave didn't commit.
 - **The requester supplies the market prices.** This is true in both modes. Check 4 compares them with public history.
 - **The NEAR Intents send half is mainnet-only.** NEAR Intents has no testnet.
 - **No professional audit yet.** Two independent AI-assisted reviews; every finding, fix and remaining risk is in `docs/SECURITY.md`.

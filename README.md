@@ -1,14 +1,14 @@
 # Touchstone
 
-**Verifiable AI trading vaults.** A touchstone is the stone used to test whether gold is real, without taking the seller's word for it.
+**Verifiable vaults for trading strategies and agents.** A touchstone is the stone used to test whether gold is real, without taking the seller's word for it.
 
-AI trading vaults on NEAR where the strategy's parameters stay sealed in Intel TDX hardware, while every claim an investor needs (which code ran, that no trade was back-filled, that risk limits held, that returns are real) can be checked by anyone, in a browser, without trusting us.
+Trading vaults on NEAR where any strategy or trading agent can run with its parameters sealed in Intel TDX hardware, while every claim an investor needs (which code ran, that no trade was back-filled, that risk limits held, that returns are real) can be checked by anyone, in a browser, without trusting us.
 
 Built at NEAR HACKATHON (Nov 2026), solo. Live on NEAR testnet. A 16-page product document with diagrams is in [`docs/Product-Document.pdf`](docs/Product-Document.pdf).
 
 ## The problem
 
-- **Investors can't verify AI fund managers.** They can't see which code runs, whether the track record was back-filled, or whether "max 3x leverage" was ever enforced.
+- **Investors can't verify fund managers or trading agents.** They can't see which code runs, whether the track record was back-filled, or whether "max 3x leverage" was ever enforced.
 - **Managers can't prove themselves without leaking the edge.** Publishing a strategy gets it copied; hiding it means nobody can trust it.
 
 ## The solution in one paragraph
@@ -42,11 +42,13 @@ Every claim with its code, its test and a live transaction: [`VERIFY.md`](VERIFY
 |---|---|
 | Vault contract (v5) with shares, guardrails, commit-then-reveal, timelocks, emergency exit | **Live** on testnet (`vault.alpha-vaults-23.testnet`, `vault2.alpha-vaults-23.testnet`) |
 | Strategy in Intel TDX (OutLayer) with sealed parameters | **Live** (relayed over HTTPS on the main vault) |
-| Attested mode: the vault requests the run on-chain and receives it in its own callback | **Live** on the rehearsal vault (full cycle with a swap); switched on for the main vault 14 Nov |
+| Attested mode: the vault requests the run on-chain and receives it in its own callback | **Live** on the rehearsal vault (full cycle with a swap). The main vault stays in relayed mode: on 14 Nov OutLayer's testnet timed out every enclave run (HTTP 524), and attested mode would have stalled it |
 | Vault-signed Uniswap swaps via Chain Signatures | **Live** on Ethereum Sepolia |
 | NEAR Intents way back (USDC to NEAR) | Arrival half **live** on testnet; send half built and tested but mainnet-only, because NEAR Intents has no testnet; live 1Click quotes |
 | Mainnet (trading on Base) | Built and tested, **not deployed** |
 | Professional audit | **No**. Two independent AI-assisted reviews, see [`docs/SECURITY.md`](docs/SECURITY.md) |
+
+The example strategy is deliberately simple (a moving-average momentum rule), so every decision is easy to check. The vault doesn't care what's inside: any deterministic strategy compiled to WebAssembly, including a model's output, plugs in the same way and gets the same guarantees.
 
 ## How NEAR is used
 

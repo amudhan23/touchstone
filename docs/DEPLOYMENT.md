@@ -152,3 +152,12 @@ Found during the rehearsal, and fixed on both vaults before Saturday:
 - **Executor and site.** `executor/net.mjs` mirrors the contract's rule, and the site follows the vault's network for RPC, wallet, explorer and the NEAR Intents route.
 - **Address derivation checked against the mainnet MPC network:** a vault at `vault.alpha-vaults.near` would own `0x6Ccc100F8B44d2e8eCe31fE1617C3979C2Ad6521` on Base.
 - **Budget for a manager-only mainnet vault:** about 4.5 NEAR (≈4.1 of it the storage stake, recoverable through `close_vault`) plus about $4 on Base ($3 USDC, $1 ETH). The attested on-chain path pays OutLayer in NEAR, so no payment key is needed.
+
+## 14 Nov (submission day)
+
+- **Strategy v2 applied** on the main vault after its 48h public timelock: `apply_strategy` tx `4FXqtAbWAnZCBp4pUWM85sZnkEvWsPecz18pkwcfkUB7`. The vault now approves `f64b6537…`, which sizes every trade inside the enclave.
+- **OutLayer testnet outage.** Every enclave run timed out that afternoon:
+  - On-chain requests got no answer after ~125s (txs `GB2rmiGC…` and `E9tjGk97…`).
+  - HTTPS calls returned OutLayer's gateway page "524: A timeout occurred" after ~126s.
+  - OutLayer's API answered normally, and both paths had worked the day before.
+- **The main vault therefore stays in relayed mode.** Attested mode would have blocked relayed cycles and left the vault silent, and after 24h of silence anyone could trigger its emergency exit. Attested mode is demonstrated end to end on `vault2`.

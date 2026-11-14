@@ -22,7 +22,7 @@ Pre-record safety: capture shots 2–6 as backup GIFs in case of live hiccups.
 
 ## X post (follows the organizers' four tips: user problem first, one complete moment, NEAR's role concretely, a next step)
 
-> AI fund managers ask you to trust them. This one can't lie.
+> Fund managers and trading bots ask you to trust them. This vault can't lie.
 >
 > Built Touchstone at NEAR HACKATHON: the strategy's parameters stay sealed in Intel TDX, yet anyone can check which code ran, that every trade was committed before it executed, and that risk limits held. Bulletproofs, verified in your browser.
 >
@@ -35,7 +35,7 @@ Pre-record safety: capture shots 2–6 as backup GIFs in case of live hiccups.
 
 Video (60 to 90 seconds, one complete moment, no slides):
 
-1. **(0–8s)** On screen: "AI fund managers say trust me. This one can't lie."
+1. **(0–8s)** On screen: "Fund managers say trust me. This vault can't lie."
 2. **(8–30s)** Open the vault page and press **Run all checks**. Each seal turns green; one sentence per seal.
 3. **(30–50s)** Counterfeit Bureau: demand 10x leverage, which is refused; back-fill a trade, which is caught.
 4. **(50–75s)** Sepolia Etherscan: the vault's own swap, with the calldata ending in the decision's hash. Say "sized inside the enclave, signed by the contract, through NEAR Chain Signatures".
@@ -43,7 +43,7 @@ Video (60 to 90 seconds, one complete moment, no slides):
 
 ## Submission description (20–2000 chars; this is ~1,300)
 
-> **Touchstone** — AI trading vaults where the strategy's
+> **Touchstone** — verifiable vaults for trading strategies and agents, where the strategy's
 > parameters stay sealed in an Intel TDX enclave (NEAR OutLayer), while
 > everything an investor needs to check is provable: (1) *which code ran* —
 > hardware attestation of the strategy WASM, enforced by the vault contract,

@@ -111,7 +111,7 @@ function navChart(v, w = 560, h = 190) {
 
 // ---------------------------------------------------------------- leaderboard
 async function renderLeaderboard() {
-  document.title = "Touchstone · verifiable AI trading vaults";
+  document.title = "Touchstone · verifiable trading vaults";
   const data = await loadData();
   if (data.vaults.length === 0) {
     $("#view").innerHTML = `<div class="panel"><p><b>No vault data.</b> The demo fixtures couldn't load — browsers block <code>fetch</code> on <code>file://</code> pages.</p>
