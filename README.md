@@ -4,7 +4,7 @@
 
 Trading vaults on NEAR where any strategy or trading agent can run with its parameters sealed in Intel TDX hardware, while every claim an investor needs (which code ran, that no trade was back-filled, that risk limits held, that returns are real) can be checked by anyone, in a browser, without trusting us.
 
-Built at NEAR HACKATHON (Nov 2026), solo. Live on NEAR testnet. A 16-page product document with diagrams is in [`docs/Product-Document.pdf`](docs/Product-Document.pdf).
+Built at NEAR HACKATHON (Nov 2026), solo. Live on NEAR testnet. A 17-page product document with diagrams is in [`docs/Product-Document.pdf`](docs/Product-Document.pdf).
 
 ## The problem
 
@@ -20,6 +20,10 @@ The strategy's **code is public** (anyone can read it and check its hash), its *
 - Bulletproofs show private risk metrics stayed in range.
 - The vault signs its own Uniswap trades through NEAR Chain Signatures, at the size the enclave chose.
 - Value comes back as NEAR through NEAR Intents.
+
+![Architecture: the investor's browser, the strategy manager and the executor talk to the vault contract on NEAR; the vault asks the OutLayer TDX enclave to run the approved build and gets back an attested decision; the vault signs its own EVM transactions through Chain Signatures; its EVM wallet swaps on Uniswap v3 and returns USDC as NEAR through NEAR Intents](docs/img/architecture.png)
+
+The vault contract is the centre: it holds the money and enforces every rule. The enclave decides and proves; it can't move funds or break a limit.
 
 ## Try it: do X, see Y
 
