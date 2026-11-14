@@ -100,7 +100,7 @@ Trust model in one line: the relayer is trusted only to run on time and to repor
 
 ## Built with, and disclosure
 
-- **Everything here was written during the hackathon window.** The first commit is 11 Nov 2026; there is no pre-hackathon code.
+- **Everything here was written during the hackathon window.** The first commit is 11 Nov 2026; there is no pre-hackathon code. This is the author's only NEAR HACKATHON submission.
 - **AI-assisted.** Most of the code and docs were written with an AI coding assistant (Claude, by Anthropic) directed by the author, which is allowed by the rules. Both security reviews were also AI-assisted and are documented in [`docs/SECURITY.md`](docs/SECURITY.md).
 - **Main libraries.** These are the direct dependencies; `Cargo.toml` and `package.json` have the full lists.
   - Rust: `near-sdk`, `near-contract-standards`, `bulletproofs`, `curve25519-dalek-ng`, `merlin`, `sha2`, `chacha20poly1305`, `uint`, `proptest`.
