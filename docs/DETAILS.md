@@ -1,4 +1,4 @@
-# Assay: details
+# Touchstone: details
 
 The long-form material moved out of the README: security summary, the in-browser checks, how to use the site, what is protected, architecture, how to run everything, and the full trust model.
 

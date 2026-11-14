@@ -1,6 +1,6 @@
-# Assay
+# Touchstone
 
-**Verifiable AI trading vaults.** An assay tests what is inside without taking the seller's word for it.
+**Verifiable AI trading vaults.** A touchstone is the stone used to test whether gold is real, without taking the seller's word for it.
 
 AI trading vaults on NEAR where the strategy's parameters stay sealed in Intel TDX hardware, while every claim an investor needs (which code ran, that no trade was back-filled, that risk limits held, that returns are real) can be checked by anyone, in a browser, without trusting us.
 

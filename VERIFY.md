@@ -1,6 +1,6 @@
 # Check every claim yourself
 
-Assay says one thing: **you don't have to trust the AI fund
+Touchstone says one thing: **you don't have to trust the AI fund
 manager.** So every claim below comes with three ways to check it, and none of
 them needs our help:
 
