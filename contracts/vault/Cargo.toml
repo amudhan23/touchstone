@@ -1,6 +1,6 @@
 [package]
 name = "vault-contract"
-description = "Verifiable Alpha Vault: shares, guardrails, commit-then-reveal trade log, attested-decision entrypoint"
+description = "Assay vault: shares, guardrails, commit-then-reveal trade log, attested-decision entrypoint"
 version.workspace = true
 edition.workspace = true
 license.workspace = true

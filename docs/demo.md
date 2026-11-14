@@ -16,7 +16,7 @@ beat under 20 seconds.
 | 6 | Cheat 3 (swapped code) + Shadow Fork's red badge/alert banner | "Swap in different strategy code: the TDX attestation hash doesn't match — deposits pause automatically." |
 | 7 | Terminal: `node executor/run.mjs --enclave outlayer --vault near --execute evm` scrolling; cut to the vault-signed swap on Sepolia Etherscan (its calldata ends in the commitment) | "The strategy runs sealed in an Intel TDX enclave on NEAR's OutLayer. It decides the trade and its size, the vault contract itself builds and MPC-signs exactly that swap through Chain Signatures, and the relayer just broadcasts it." |
 | 7b | Live vault page: *Terms of issue* → trust mode, and the closed deposit panel | "And we say plainly what the relayer is still trusted for: running on time and the chart. It can't size trades, price your deposit or cash a fee. Deposits only open when everything is back in NEAR. Attested mode removes even that, and it's built for when OutLayer's on-chain worker goes live." |
-| 8 | Back to leaderboard | "The strategy's edge stays secret. Everything an investor needs is proven. Verifiable Alpha Vaults, on NEAR." |
+| 8 | Back to leaderboard | "The strategy's edge stays secret. Everything an investor needs is proven. Assay, on NEAR." |
 
 Pre-record safety: capture shots 2–6 as backup GIFs in case of live hiccups.
 
@@ -24,7 +24,7 @@ Pre-record safety: capture shots 2–6 as backup GIFs in case of live hiccups.
 
 > AI fund managers ask you to trust them. This one can't lie.
 >
-> Built Verifiable Alpha Vaults at NEAR HACKATHON: the strategy's parameters stay sealed in Intel TDX, yet anyone can check which code ran, that every trade was committed before it executed, and that risk limits held. Bulletproofs, verified in your browser.
+> Built Assay at NEAR HACKATHON: the strategy's parameters stay sealed in Intel TDX, yet anyone can check which code ran, that every trade was committed before it executed, and that risk limits held. Bulletproofs, verified in your browser.
 >
 > What NEAR does here: OutLayer runs the sealed strategy, Chain Signatures lets the vault contract sign its own swaps, NEAR Intents brings the money back as NEAR.
 >
@@ -43,7 +43,7 @@ Video (60 to 90 seconds, one complete moment, no slides):
 
 ## Submission description (20–2000 chars; this is ~1,300)
 
-> **Verifiable Alpha Vaults** — AI trading vaults where the strategy's
+> **Assay** — AI trading vaults where the strategy's
 > parameters stay sealed in an Intel TDX enclave (NEAR OutLayer), while
 > everything an investor needs to check is provable: (1) *which code ran* —
 > hardware attestation of the strategy WASM, enforced by the vault contract,

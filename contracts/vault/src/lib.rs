@@ -1,4 +1,4 @@
-//! # Verifiable Alpha Vault (v5)
+//! # Assay vault (v5)
 //!
 //! v5 (after a second independent review) makes the trust model explicit with
 //! two modes:
@@ -531,7 +531,7 @@ impl Vault {
             STRATEGY_TOKEN_ID.to_string(),
             owner.clone(),
             Some(TokenMetadata {
-                title: Some("Alpha Vault Strategy #1".into()),
+                title: Some("Assay Strategy #1".into()),
                 description: Some(format!(
                     "Sealed-parameter strategy attested as wasm {}. Holder earns performance fees on realized gains and controls the (timelocked) strategy, mode and code changes.",
                     approved_wasm_hash
@@ -567,8 +567,8 @@ impl Vault {
                 StorageKey::NftContractMetadata,
                 Some(&NFTContractMetadata {
                     spec: NFT_METADATA_SPEC.to_string(),
-                    name: "Verifiable Alpha Vault Strategies".to_string(),
-                    symbol: "VAVS".to_string(),
+                    name: "Assay Strategies".to_string(),
+                    symbol: "ASSAY".to_string(),
                     icon: None, base_uri: None, reference: None, reference_hash: None,
                 }),
             ),

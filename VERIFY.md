@@ -1,6 +1,6 @@
 # Check every claim yourself
 
-Verifiable Alpha Vaults says one thing: **you don't have to trust the AI fund
+Assay says one thing: **you don't have to trust the AI fund
 manager.** So every claim below comes with three ways to check it, and none of
 them needs our help:
 

@@ -111,7 +111,7 @@ function navChart(v, w = 560, h = 190) {
 
 // ---------------------------------------------------------------- leaderboard
 async function renderLeaderboard() {
-  document.title = "Verifiable Alpha Vaults";
+  document.title = "Assay · verifiable AI trading vaults";
   const data = await loadData();
   if (data.vaults.length === 0) {
     $("#view").innerHTML = `<div class="panel"><p><b>No vault data.</b> The demo fixtures couldn't load — browsers block <code>fetch</code> on <code>file://</code> pages.</p>
@@ -159,7 +159,7 @@ async function renderVault(id) {
     return;
   }
   CURRENT_VAULT = v;
-  document.title = `${v.name} — Verifiable Alpha Vaults`;
+  document.title = `${v.name} — Assay`;
 
   const g = v.guardrails;
   const commitRows = v.commitments
@@ -398,7 +398,7 @@ async function onRunChecks() {
 
 // ------------------------------------------------------------ red-team console
 async function renderRedTeam() {
-  document.title = "Counterfeit Bureau — Verifiable Alpha Vaults";
+  document.title = "Counterfeit Bureau — Assay";
   const data = await loadData();
   if (!data.cheats) {
     $("#view").innerHTML = `<p class="muted">Red-team fixtures unavailable (serve the frontend folder over http).</p>`;
